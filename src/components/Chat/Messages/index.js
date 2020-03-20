@@ -1,7 +1,7 @@
 import React from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import PropTypes from "prop-types";
-import Message from "../Message";
+import Message from "./Message";
 
 export default function Messages({ messages, name }) {
   return (

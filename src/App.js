@@ -2,12 +2,18 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Join from "./components/Join";
 import Chat from "./components/Chat";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { useStyles } from "./styles";
 
 export default function App() {
+  const classes = useStyles();
   return (
-    <Router>
-      <Route path="/" exact component={Join} />
-      <Route path="/chat" component={Chat} />
-    </Router>
+    <div className={classes.mainWrapper}>
+      <CssBaseline />
+      <Router>
+        <Route path="/" exact component={Join} />
+        <Route path="/chat" component={Chat} />
+      </Router>
+    </div>
   );
 }

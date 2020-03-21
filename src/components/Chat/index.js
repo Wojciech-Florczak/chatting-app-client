@@ -5,6 +5,8 @@ import InfoBar from "./InfoBar";
 import Input from "./Input";
 import Messages from "./Messages";
 import UsersList from "../UsersList";
+import { useStyles } from "./styles";
+import { Paper } from "@material-ui/core";
 
 let socket;
 
@@ -14,6 +16,7 @@ export default function Chat({ location }) {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
+  const classes = useStyles();
 
   const ENDPOINT = "localhost:5000";
 
@@ -22,12 +25,8 @@ export default function Chat({ location }) {
     socket = io(ENDPOINT);
     setName(name);
     setRoom(room);
-    socket.emit("join", { name, room }, () => {});
 
-    return () => {
-      socket.emit("disconnect");
-      socket.off();
-    };
+    socket.emit("join", { name, room }, () => {});
   }, [ENDPOINT, location.search]);
 
   useEffect(() => {
@@ -37,6 +36,11 @@ export default function Chat({ location }) {
     socket.on("roomData", ({ users }) => {
       setUsers(users);
     });
+
+    return () => {
+      socket.emit("disconnect");
+      socket.off();
+    };
   }, [messages]);
 
   const sendMessage = e => {
@@ -48,8 +52,8 @@ export default function Chat({ location }) {
   };
 
   return (
-    <div>
-      <div>
+    <div className={classes.outerWrapper}>
+      <Paper square>
         <InfoBar room={room} />
         <Messages messages={messages} name={name} />
         <Input
@@ -57,7 +61,7 @@ export default function Chat({ location }) {
           setMessage={setMessage}
           sendMessage={sendMessage}
         />
-      </div>
+      </Paper>
       <UsersList users={users} />
     </div>
   );

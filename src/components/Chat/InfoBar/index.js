@@ -1,18 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
+import CloseIcon from "@material-ui/icons/Close";
+import ChatIcon from "@material-ui/icons/Chat";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
+import { useStyles } from "./styles";
 
 export default function InfoBar({ room }) {
+  const classes = useStyles();
   return (
     <div>
-      <div>
-        <img src="/" alt="online" />
-        <h3>{room}</h3>
-      </div>
-      <div>
-        <a href="/">
-          <img src="/" alt="close" />
-        </a>
-      </div>
+      <AppBar position="static">
+        <Toolbar className={classes.toolbar}>
+          <ChatIcon edge="start" />
+          <Typography variant="h6" className={classes.title}>
+            {room}
+          </Typography>
+          <a href="/" className={classes.closeButton}>
+            <CloseIcon />
+          </a>
+        </Toolbar>
+      </AppBar>
     </div>
   );
 }

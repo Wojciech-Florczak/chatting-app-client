@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function UsersList({ users }) {
-  console.log(users);
   return (
     <div>
       <ul>

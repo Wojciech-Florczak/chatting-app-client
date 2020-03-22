@@ -29,4 +29,6 @@ npm start
 ___
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-[preview]: https://stoic-lamport-fac389.netlify.com
+[preview]: https://nostalgic-spence-1337d2.netlify.com/
+[chatting-app-server]: https://github.com/Wojciech-Florczak/chatting-app-server
+[Create React App]: https://github.com/facebook/create-react-app.

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import queryString from "query-string";
 import io from "socket.io-client";
 import InfoBar from "./InfoBar";
@@ -18,6 +19,7 @@ export default function Chat({ location }) {
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
   const [open, setOpen] = useState(false);
+  const history = useHistory();
   const classes = useStyles();
 
   const ENDPOINT = "https://chatting-for-cats.herokuapp.com/";
@@ -28,7 +30,13 @@ export default function Chat({ location }) {
     setName(name);
     setRoom(room);
 
-    socket.emit("join", { name, room }, () => {});
+    socket.emit("join", { name, room }, error => {
+      if (error) {
+        alert(error);
+        goBack();
+      }
+    });
+    //eslint-disable-next-line
   }, [ENDPOINT, location.search]);
 
   useEffect(() => {
@@ -51,6 +59,10 @@ export default function Chat({ location }) {
     if (message) {
       socket.emit("sendMessage", message, () => setMessage(""));
     }
+  };
+
+  const goBack = () => {
+    history.push("/");
   };
 
   return (

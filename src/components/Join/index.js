@@ -17,22 +17,24 @@ export default function Join() {
             <h1 className={classes.heading}>
               Type your name and name of the room you want to join.
             </h1>
-            <div className={classes.input}>
-              <TextField
-                id="input-name"
-                label="Name"
-                variant="outlined"
-                onChange={e => setName(e.target.value)}
-              />
-            </div>
-            <div className={classes.input}>
-              <TextField
-                id="input-room"
-                label="Room"
-                variant="outlined"
-                onChange={e => setRoom(e.target.value)}
-              />
-            </div>
+            <form autoComplete="off">
+              <div className={classes.input}>
+                <TextField
+                  id="input-name"
+                  label="Name"
+                  variant="outlined"
+                  onChange={e => setName(e.target.value)}
+                />
+              </div>
+              <div className={classes.input}>
+                <TextField
+                  id="input-room"
+                  label="Room"
+                  variant="outlined"
+                  onChange={e => setRoom(e.target.value)}
+                />
+              </div>
+            </form>
             <Link
               to={`/chat?name=${name}&room=${room}`}
               onClick={e => (!name || !room) && e.preventDefault()}

@@ -17,5 +17,9 @@ export const useStyles = createUseStyles({
   },
   userAvatar: {
     marginLeft: 10
+  },
+  name: {
+    color: "gray",
+    fontWeight: "bold !important"
   }
 });

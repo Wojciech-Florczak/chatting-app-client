@@ -2,10 +2,7 @@ import { createUseStyles } from "react-jss";
 
 export const useStyles = createUseStyles({
   outerWrapper: {
-    height: 500,
-    width: 800,
-    maxWidth: "100%",
-    maxHeight: "100%"
+    justifyContent: "center"
   },
   innerWrapper: { height: "100%", display: "flex", justifyContent: "center" },
   contentWrapper: {

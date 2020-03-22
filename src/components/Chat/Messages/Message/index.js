@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import ReactEmoji from "react-emoji";
 import {
-  Typography,
   ListItem,
   ListItemText,
-  ListItemAvatar
+  ListItemAvatar,
+  Avatar,
+  Typography
 } from "@material-ui/core";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { useStyles } from "./styles";
 
 export default function Message({ message, name }) {
@@ -22,19 +22,33 @@ export default function Message({ message, name }) {
 
   const systemMessage = (
     <ListItem>
-      <ListItemText className={classes.adminText} secondary={ReactEmoji.emojify(message.text)} />
+      <ListItemText
+        className={classes.adminText}
+        secondary={ReactEmoji.emojify(message.text)}
+      />
     </ListItem>
   );
 
   const userMessage = (
     <ListItem>
       <ListItemText
-        primary={trimmedName}
-        secondary={ReactEmoji.emojify(message.text)}
+        primary={
+          <Typography className={classes.name} component="p" variant="caption">
+            {trimmedName}
+          </Typography>
+        }
+        secondary={
+          <Typography component="p" variant="body2">
+            {ReactEmoji.emojify(message.text)}
+          </Typography>
+        }
         className={classes.userText}
       />
       <ListItemAvatar className={classes.userAvatar}>
-        <AccountCircleIcon className={classes.avatar} />
+        <Avatar
+          alt={`${message.user} avatar`}
+          src={`https://robohash.org/${message.user}?set=set4`}
+        />
       </ListItemAvatar>
     </ListItem>
   );
@@ -42,11 +56,22 @@ export default function Message({ message, name }) {
   const strangerMessage = (
     <ListItem>
       <ListItemAvatar>
-        <AccountCircleIcon className={classes.avatar} />
+        <Avatar
+          alt={`${message.user} avatar`}
+          src={`https://robohash.org/${message.user}?set=set4`}
+        />
       </ListItemAvatar>
       <ListItemText
-        primary={`${message.user} (not you)`}
-        secondary={ReactEmoji.emojify(message.text)}
+        primary={
+          <Typography className={classes.name} component="p" variant="caption">
+            {message.user}
+          </Typography>
+        }
+        secondary={
+          <Typography component="p" variant="body2">
+            {ReactEmoji.emojify(message.text)}
+          </Typography>
+        }
         className={classes.strangerText}
       />
     </ListItem>

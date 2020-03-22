@@ -2,7 +2,8 @@ import { createUseStyles } from "react-jss";
 
 export const useStyles = createUseStyles({
   scroller: {
-    height: 320
+    flex: 1,
+    overflow: "auto"
   },
   wrapper: {
     padding: "0.5rem"

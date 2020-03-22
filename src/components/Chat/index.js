@@ -7,6 +7,7 @@ import Messages from "./Messages";
 import UsersList from "../UsersList";
 import { useStyles } from "./styles";
 import { Paper } from "@material-ui/core";
+import UsersDialog from "./UsersDialog";
 
 let socket;
 
@@ -16,9 +17,10 @@ export default function Chat({ location }) {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
 
-  const ENDPOINT = "localhost:5000";
+  const ENDPOINT = "https://chatting-for-cats.herokuapp.com/";
 
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
@@ -53,8 +55,9 @@ export default function Chat({ location }) {
 
   return (
     <div className={classes.outerWrapper}>
-      <Paper square>
-        <InfoBar room={room} />
+      <UsersList users={users} />
+      <Paper square className={classes.chatWrapper}>
+        <InfoBar room={room} setOpen={setOpen} />
         <Messages messages={messages} name={name} />
         <Input
           message={message}
@@ -62,7 +65,7 @@ export default function Chat({ location }) {
           sendMessage={sendMessage}
         />
       </Paper>
-      <UsersList users={users} />
+      <UsersDialog open={open} setOpen={setOpen} users={users} />
     </div>
   );
 }

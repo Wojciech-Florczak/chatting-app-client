@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   Dialog,
   DialogTitle,
@@ -39,3 +40,10 @@ export default function UsersDialog({ open, setOpen, users }) {
     </Dialog>
   );
 }
+
+
+UsersDialog.propTypes = {
+  open: PropTypes.bool,
+  setOpen: PropTypes.func,
+  users: PropTypes.array,
+};
